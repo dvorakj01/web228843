@@ -2,17 +2,17 @@
 <html lang="cs">
 <head>
   <meta charset="UTF-8">
-  <title>Power BI Náhled</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Power BI Report</title>
   <style>
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       background-color: #f4f6f8;
-      background-image: repeating-linear-gradient(45deg, #eaeaea 0px, #eaeaea 2px, transparent 2px, transparent 10px);
-      background-size: 40px 40px;
       display: flex;
       flex-direction: column;
       align-items: center;
       padding: 40px;
+      overflow: hidden;
     }
 
     h1 {
@@ -48,40 +48,77 @@
       margin-top: 20px;
       box-shadow: 0 4px 12px rgba(0,0,0,0.1);
     }
+
+    #closeReportButton {
+      display: none;
+      padding: 10px 20px;
+      margin-top: 20px;
+      border: none;
+      border-radius: 8px;
+      background-color: #f44336;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+
+    #dynamicBackground {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(45deg, #ff6f61, #6fa3ff, #61ff6f);
+      background-size: 200% 200%;
+      animation: gradientAnimation 5s ease infinite;
+      z-index: -1; /* Background behind content */
+    }
+
+    @keyframes gradientAnimation {
+      0% { background-position: 0% 0%; }
+      50% { background-position: 100% 100%; }
+      100% { background-position: 0% 0%; }
+    }
+
   </style>
 </head>
 <body>
 
-  <h1>Report - Analýza cyklistických nehod</h1>
+  <div id="dynamicBackground"></div>
 
-  <div>
-    <button class="btn" id="showButton" onclick="zobrazNahlad()">Zobraz náhled</button>
-    <button class="btn" id="hideButton" onclick="skryjNahlad()" style="display: none;">Skryj náhled</button>
-  </div>
+  <h1>Power BI Report</h1>
 
-  <iframe id="preview" src=""></iframe>
+  <button class="btn" id="showReportButton" onclick="zobrazNahlad()">Zobraz report</button>
+  <button class="btn" id="closeReportButton" onclick="uzavriReport()">Uzavřít report</button>
+
+  <!-- Power BI Report -->
+  <iframe id="preview" src="" frameborder="0"></iframe>
 
   <script>
     function zobrazNahlad() {
       const iframe = document.getElementById('preview');
-      const showBtn = document.getElementById('showButton');
-      const hideBtn = document.getElementById('hideButton');
+      const showReportBtn = document.getElementById('showReportButton');
+      const closeReportBtn = document.getElementById('closeReportButton');
 
+      // Nastavení URL pro report Power BI
       iframe.src = "https://app.powerbi.com/view?r=eyJrIjoiOGY1ODQxNjAtMDY2OC00OThkLWEzNDMtZTI2ZDk5NjA2NGRlIiwidCI6ImM2M2NlNzI5LWNhMTctNGU1Mi1hYTJkLTk2Yjc5NDg5YTU0MiIsImMiOjh9";
+      
+      // Zobrazení reportu
       iframe.style.display = "block";
-      showBtn.style.display = "none";
-      hideBtn.style.display = "inline-block";
+      showReportBtn.style.display = "none";  // Skrytí tlačítka pro otevření
+      closeReportBtn.style.display = "inline-block";  // Zobrazení tlačítka pro uzavření
     }
 
-    function skryjNahlad() {
+    function uzavriReport() {
       const iframe = document.getElementById('preview');
-      const showBtn = document.getElementById('showButton');
-      const hideBtn = document.getElementById('hideButton');
+      const showReportBtn = document.getElementById('showReportButton');
+      const closeReportBtn = document.getElementById('closeReportButton');
 
-      iframe.style.display = "none";
+      // Skrytí reportu
       iframe.src = "";
-      showBtn.style.display = "inline-block";
-      hideBtn.style.display = "none";
+      iframe.style.display = "none";
+      showReportBtn.style.display = "inline-block";  // Zobrazení tlačítka pro otevření
+      closeReportBtn.style.display = "none";  // Skrytí tlačítka pro uzavření
     }
   </script>
 
