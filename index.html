@@ -1,14 +1,83 @@
-<!DOCTYPE html> 
-<html lang="cs"> 
+<!DOCTYPE html>
+<html lang="cs">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Otevřít Power BI</title> 
-</head> 
+  <meta charset="UTF-8">
+  <title>Power BI Náhled</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f4f6f8;
+      background-image: repeating-linear-gradient(45deg, #eaeaea 0px, #eaeaea 2px, transparent 2px, transparent 10px);
+      background-size: 40px 40px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px;
+    }
 
+    h1 {
+      margin-bottom: 20px;
+      color: #333;
+    }
+
+    .btn {
+      padding: 10px 20px;
+      margin: 10px 5px;
+      border: none;
+      border-radius: 8px;
+      background-color: #0078D4;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      transition: background-color 0.2s, transform 0.2s;
+    }
+
+    .btn:hover {
+      background-color: #005fa3;
+      transform: scale(1.02);
+    }
+
+    #preview {
+      display: none;
+      width: 90%;
+      max-width: 1200px;
+      height: 600px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      margin-top: 20px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+  </style>
+</head>
 <body>
-<h1>Otevřít Power BI Dashboard</h1>
-<p>Kliknutím na tlačítko níže otevřete dashboard:</p>
-<a href="https://app.powerbi.com/view?r=eyJrIjoiMTYzNWJjZTUtNDM4NC00ZmFjLWFiNDgtMjQyZTkwZTNmMDQ1IiwidCI6ImM2M2NlNzI5LWNhMTctNGU1Mi1hYTJkLTk2Yjc5NDg5YTU0MiIsImMiOjh9" target="_blank"><button>Otevřít</button></a>
-<button>Otevřít2</button>
+
+  <h1>Power BI Report</h1>
+
+  <div>
+    <button class="btn" onclick="zobrazNahlad()">Zobraz náhled</button>
+    <button class="btn" id="hideButton" onclick="skryjNahlad()" style="display: none;">Skryj náhled</button>
+  </div>
+
+  <iframe id="preview" src=""></iframe>
+
+  <script>
+    function zobrazNahlad() {
+      const iframe = document.getElementById('preview');
+      const hideBtn = document.getElementById('hideButton');
+      iframe.src = "https://app.powerbi.com/view?r=eyJrIjoiOGY1ODQxNjAtMDY2OC00OThkLWEzNDMtZTI2ZDk5NjA2NGRlIiwidCI6ImM2M2NlNzI5LWNhMTctNGU1Mi1hYTJkLTk2Yjc5NDg5YTU0MiIsImMiOjh9";
+      iframe.style.display = "block";
+      hideBtn.style.display = "inline-block";
+    }
+
+    function skryjNahlad() {
+      const iframe = document.getElementById('preview');
+      const hideBtn = document.getElementById('hideButton');
+      iframe.style.display = "none";
+      iframe.src = "";
+      hideBtn.style.display = "none";
+    }
+  </script>
+
 </body>
+</html>
