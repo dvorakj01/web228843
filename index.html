@@ -55,7 +55,7 @@
   <h1>Power BI Report</h1>
 
   <div>
-    <button class="btn" onclick="zobrazNahlad()">Zobraz náhled</button>
+    <button class="btn" id="showButton" onclick="zobrazNahlad()">Zobraz náhled</button>
     <button class="btn" id="hideButton" onclick="skryjNahlad()" style="display: none;">Skryj náhled</button>
   </div>
 
@@ -64,17 +64,23 @@
   <script>
     function zobrazNahlad() {
       const iframe = document.getElementById('preview');
+      const showBtn = document.getElementById('showButton');
       const hideBtn = document.getElementById('hideButton');
+
       iframe.src = "https://app.powerbi.com/view?r=eyJrIjoiOGY1ODQxNjAtMDY2OC00OThkLWEzNDMtZTI2ZDk5NjA2NGRlIiwidCI6ImM2M2NlNzI5LWNhMTctNGU1Mi1hYTJkLTk2Yjc5NDg5YTU0MiIsImMiOjh9";
       iframe.style.display = "block";
+      showBtn.style.display = "none";
       hideBtn.style.display = "inline-block";
     }
 
     function skryjNahlad() {
       const iframe = document.getElementById('preview');
+      const showBtn = document.getElementById('showButton');
       const hideBtn = document.getElementById('hideButton');
+
       iframe.style.display = "none";
       iframe.src = "";
+      showBtn.style.display = "inline-block";
       hideBtn.style.display = "none";
     }
   </script>
